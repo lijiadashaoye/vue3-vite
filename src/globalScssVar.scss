@@ -1,0 +1,14 @@
+
+@forward 'element-plus/theme-chalk/src/common/var.scss'
+with ($colors: ('primary': ('base': rgb(128, 70, 0), )));
+@use "element-plus/theme-chalk/src/index.scss"as *;
+
+$margin:3px;
+p {
+    margin: $margin
+}
+html,
+body {
+    height: calc(100% - $margin - $margin);
+    margin: $margin
+}
