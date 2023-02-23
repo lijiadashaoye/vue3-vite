@@ -1,12 +1,15 @@
-import { defineConfig } from 'vite'
+import { defineConfig, splitVendorChunkPlugin } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
 import viteCompression from 'vite-plugin-compression'  // gizp 压缩代码插件
 // Vite常用基本配置：https://www.weipxiu.com/8649.html
-import { uglify } from "rollup-plugin-uglify";
 
-// cnpm install core-js@3 @babel/core @babel/preset-env rollup-plugin-babel -D
-import babel from "rollup-plugin-babel";
+// cnpm i @rollup/plugin-terser -D
+import terser from "@rollup/plugin-terser";
+// cnpm i @babel/core @babel/preset-env @rollup/plugin-babel -D
+import babel from '@rollup/plugin-babel';
+// 支持使用require()
+import requireTransform from 'vite-plugin-require-transform';
 
 export default defineConfig((config) => {
     return {
@@ -39,8 +42,12 @@ export default defineConfig((config) => {
             }
         },
         build: {
+            chunkSizeWarningLimit: 1024 * 300,
+            // false 时整个项目中的所有 CSS 将被提取到一个 CSS 文件中。
+            // cssCodeSplit: false,
+
             // 启用true/禁用false gzip 压缩大小报告
-            reportCompressedSize: false,
+            reportCompressedSize: true,
             rollupOptions: {
                 output: {
                     // 指定打包文件名称
@@ -55,7 +62,7 @@ export default defineConfig((config) => {
                             return '[hash]' // 其他文件以哈希方式命名
                         }
                     }
-                }
+                },
             }
         },
         plugins: [
@@ -69,9 +76,10 @@ export default defineConfig((config) => {
             }),
             babel({
                 exclude: 'node_modules/**',
+                babelHelpers: 'bundled',
                 presets: [
                     [
-                        '@babel/preset-env',
+                        '@babel/env',
                         {
                             modules: false,
                             useBuiltIns: 'usage',
@@ -84,8 +92,8 @@ export default defineConfig((config) => {
                     ],
                 ],
             }),
-            // UglifyJS是个包含JS解释器、代码最小化、压缩、美化的工具集，是前端开发打包的最常用工具之一
-            uglify(),  // 加上后包会更小一些
+            // terser 一个Rollup插件，用于生成精简的捆绑包
+            terser(),  // 加上后包会更小一些
             viteCompression({
                 algorithm: 'gzip', // 压缩算法
                 // 启用压缩的文件大小限制
@@ -100,7 +108,9 @@ export default defineConfig((config) => {
                         server.ws.send('my:greetings', { msg: 'hello' });
                     })
                 },
-            }
+            },
+            // 支持使用require()
+            requireTransform(),
         ]
     }
 })
