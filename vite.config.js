@@ -24,7 +24,7 @@ function setConfig(config) {
                 },
             }
         }
-    }
+    };
     if (config.mode === 'development') {
         return {
             base: '/',
@@ -116,8 +116,6 @@ function setConfig(config) {
                         ],
                     ]
                 }),
-                // terser 一个Rollup插件，用于生成精简的捆绑包
-                // terser(),  // 加上后包会更小一些
                 viteCompression({
                     algorithm: 'gzip', // 压缩算法
                     // 启用压缩的文件大小限制
