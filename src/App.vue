@@ -1,16 +1,12 @@
 <template>
   <div style="height: 33px">
-    <button @click="routeChange('one')">one</button>
-    <button @click="routeChange('two')">two</button>
-    <button @click="routeChange('three')">three</button>
+    <button @click="routeChange('one')" class="navBtn">one</button>
+    <button @click="routeChange('two')" class="navBtn">two</button>
+    <button @click="routeChange('three')" class="navBtn">three</button>
     <el-button type="primary" @click="routeChange('four')">four</el-button>
     <Edit style="width: 1em; height: 1em; margin-right: 8px" />
   </div>
 
-  <!-- <svg width="100" height="100">
-  <circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" />
-  抱歉，您的浏览器不支持嵌入式 SVG。
-</svg> -->
   <router-view></router-view>
   <!-- 路由缓存化 -->
   <!-- <router-view v-slot="{ Component }">
