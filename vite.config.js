@@ -56,17 +56,9 @@ export default defineConfig((config) => {
                         }
                     }
                 }
-            },
-            terserOptions: {
-                compress: {
-                    drop_console: true, //去掉console
-                    drop_debugger: true, // 去掉debugger
-                },
-            },
-
+            }
         },
         plugins: [
-            uglify(),
             vue({
                 template: {
                     compilerOptions: {
@@ -75,21 +67,6 @@ export default defineConfig((config) => {
                     }
                 }
             }),
-            viteCompression({
-                algorithm: 'gzip', // 压缩算法
-                // 启用压缩的文件大小限制
-                threshold: 1024 * 200, // 对大于 200KB 的文件进行压缩
-                deleteOriginFile: true,// 压缩后是否删除原文件，默认为 false
-            }),
-            {
-                // 构建一个本地开发环境的服务器通信
-                configureServer(server) {
-                    server.ws.on('my:from-client', (data, client) => {
-                        console.log('Message from client:', data.msg)
-                        server.ws.send('my:greetings', { msg: 'hello' });
-                    })
-                },
-            },
             babel({
                 exclude: 'node_modules/**',
                 presets: [
@@ -107,6 +84,23 @@ export default defineConfig((config) => {
                     ],
                 ],
             }),
+            // UglifyJS是个包含JS解释器、代码最小化、压缩、美化的工具集，是前端开发打包的最常用工具之一
+            uglify(),  // 加上后包会更小一些
+            viteCompression({
+                algorithm: 'gzip', // 压缩算法
+                // 启用压缩的文件大小限制
+                threshold: 1024 * 200, // 对大于 200KB 的文件进行压缩
+                deleteOriginFile: true,// 压缩后是否删除原文件，默认为 false
+            }),
+            {
+                // 构建一个本地开发环境的服务器通信
+                configureServer(server) {
+                    server.ws.on('my:from-client', (data, client) => {
+                        console.log('Message from client:', data.msg)
+                        server.ws.send('my:greetings', { msg: 'hello' });
+                    })
+                },
+            }
         ]
     }
 })
