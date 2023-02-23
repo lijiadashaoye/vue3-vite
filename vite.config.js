@@ -90,7 +90,7 @@ export default defineConfig((config) => {
                             },
                         },
                     ],
-                ],
+                ]
             }),
             // terser 一个Rollup插件，用于生成精简的捆绑包
             terser(),  // 加上后包会更小一些
