@@ -22,7 +22,29 @@ export default async function (can) {
         fn3(gl, width, height)
     })
 }
+
 function fn1(gl) {
+    let pro1 = new Promise(res => {
+        let image1 = new Image();
+        image1.crossOrigin = "";
+        image1.src = './src/assets/1.png'
+        image1.onload = function (e) {
+            res(image1)
+        };
+    }),
+        pro2 = new Promise(res => {
+            let image2 = new Image();
+            image2.crossOrigin = "";
+            image2.src = './src/assets/2.png'
+            image2.onload = function (e) {
+                res(image2)
+            };
+        })
+    Promise.all([pro1, pro2]).then(res => {
+        toRender(gl, res)
+    })
+}
+function toRender(gl, imgs) {
     let verCode = `
         attribute vec4 a_Position;
         attribute vec2 a_TexCoord;
@@ -88,50 +110,49 @@ function fn1(gl) {
     gl.enableVertexAttribArray(a_TexCoord);
     gl.vertexAttribPointer(a_TexCoord, 2, gl.FLOAT, false, fsize * 4, fsize * 2);
 
-    let index = 0
-    var image1 = new Image();
-    image1.crossOrigin = "";
-    image1.src = './src/assets/1.png'
-    image1.onload = function (e) {
-        ++index
-        render(0, e.target)
-        isOk()
-    };
-    var image2 = new Image();
-    image2.crossOrigin = "";
-    image2.src = './src/assets/2.png'
-    image2.onload = function (e) {
-        ++index
-        render(1, e.target)
-        isOk()
-    };
-    function isOk() {
-        if (index === 2) {
-            gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
-        }
-    }
-    function render(num, img) {
-        // 翻转Y轴，因为图片的Y轴正方向向下，纹理坐标的Y轴向上
-        gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1)
+    // 翻转Y轴，因为图片的Y轴正方向向下，纹理坐标的Y轴向上
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1)
 
+    imgs.map(t => {
         // 创建纹理
         let texture = gl.createTexture();
         gl.bindTexture(gl.TEXTURE_2D, texture);
-
         // 设置筛选器，让我们可以绘制任何尺寸的图像
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR)
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR)
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
         gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
         // 将图像上传到纹理
-        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img)
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, t)
+        return texture
+    })
+        .forEach((t, i) => {
+            let u_sampler0 = gl.getUniformLocation(program, `u_sampler${i}`);
+            gl.uniform1i(u_sampler0, i);
+            gl.activeTexture(gl[`TEXTURE${i}`])
+            gl.bindTexture(gl.TEXTURE_2D, t);
 
-        let u_sampler = gl.getUniformLocation(program, `u_sampler${num}`);
-        // 设置使用的纹理单元
-        gl.uniform1i(u_sampler, num);
-        // 设置每个纹理单元对应一个纹理
-        gl.activeTexture(gl[`TEXTURE${num}`])
-    }
+        })
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+    // 绑定纹理数据要在创建完所有纹理后执行，以下是错误写法
+    // imgs.forEach((t, i) => {
+    //     // 创建纹理
+    //     let texture = gl.createTexture();
+    //     gl.bindTexture(gl.TEXTURE_2D, texture);
+    //     // 设置筛选器，让我们可以绘制任何尺寸的图像
+    //     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR)
+    //     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR)
+    //     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    //     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    //     // 将图像上传到纹理
+    //     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, t)
+    //     let u_sampler = gl.getUniformLocation(program, `u_sampler${i}`);
+    //     gl.uniform1i(u_sampler, i);
+    //     gl.activeTexture(gl[`TEXTURE${i}`])
+    //     gl.bindTexture(gl.TEXTURE_2D, texture);
+    // })
+    // gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 }
 function fn2(gl) {
     let verCode = `
@@ -316,4 +337,3 @@ function fn3(gl, width, height) {
         gl.drawArrays(gl.TRIANGLES, 0, 6);
     }
 }
-
