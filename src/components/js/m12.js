@@ -82,12 +82,6 @@ function toRender(gl, imgs) {
     // 变换的时候，相当于假定图片的坐标为0-1，如果让图片缩小显示，那就把顶点坐标向左，向上移动相应图片尺寸多少倍数，
     // 然后将图片尺寸和填充区域尺寸对换，图片的原点是做下角（0，0）
 
-    // let arr = [
-    //     -0.5, 0.5, -0.5, 0.5,
-    //     -0.5, -0.5, -0.5, -0.5,
-    //     0.5, 0.5, 0.5, 0.5,
-    //     0.5, -0.5, 0.5, -0.5,
-    // ]
     // 顶点坐标决定在画布哪里显示纹理，纹理坐标决定显示纹理图片的那块区域
     let arr = [
         // 顶点坐标    纹理坐标(以图片尺寸为坐标系 0 - 1)
@@ -131,7 +125,6 @@ function toRender(gl, imgs) {
             gl.uniform1i(u_sampler0, i);
             gl.activeTexture(gl[`TEXTURE${i}`])
             gl.bindTexture(gl.TEXTURE_2D, t);
-
         })
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
 
