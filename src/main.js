@@ -1,7 +1,5 @@
 import {
-    createApp,
-    markRaw,
-
+    createApp
 } from 'vue'
 import App from './App.vue'
 import axios from './axios'
@@ -13,7 +11,6 @@ import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
 import zhuCeCom from './components/zhuCeCom';
 import './selfdefine/makeElement'; // 引入自定义webComponent
-// import three from 'three';
 
 let app = createApp(App)
     .use(router)
@@ -36,11 +33,12 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 // 使用pinia
 import pinia from './pinia';
 app.use(pinia.pinia)
-app.config.globalProperties.pinia = markRaw(pinia.store);// 全局挂载写法一
-app.provide('pinia2', markRaw(pinia.store)) // 全局挂载写法二
+app.config.globalProperties.pinia = pinia.store;// 全局挂载写法一
+app.provide('pinia2', pinia.store) // 全局挂载写法二
 // 使用asios
-app.config.globalProperties.axios1 = markRaw(axios); // 全局挂载写法一
-app.provide('axios2', markRaw(axios)) // 全局挂载写法二
+// app.config.globalProperties.axios1 = axios; // 全局挂载写法一
+app.config.globalProperties.axios1 = axios; // 全局挂载写法一
+app.provide('axios2', axios) // 全局挂载写法二
 
 app.mount('#app')
 
@@ -48,3 +46,6 @@ app.mount('#app')
 import directives from './directive'
 app.directive('makeFocus', directives.makeFocus)
 
+import * as THREE from "three";
+app.config.globalProperties.$THREE1 = THREE; // 全局挂载写法一
+app.provide('THREE2', THREE) // 全局挂载写法二

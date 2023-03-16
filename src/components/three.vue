@@ -1,9 +1,5 @@
 <template>
   <div>
-    <div class="m">
-      <canvas ref="can" class="can" width="800" height="400"></canvas>
-      <div>额鹅鹅鹅</div>
-    </div>
     <ul>
       <li
         v-for="(gl, i) in glList"
@@ -15,21 +11,21 @@
       </li>
     </ul>
     <div class="wap" v-if="show === 'm1'">
-      <canvas ref="can1" class="can" width="350" height="200"></canvas>
+      <canvas ref="can1" class="can" width="550" height="350"></canvas>
       <p>两点画平面三角形</p>
     </div>
     <div class="wap" v-if="show === 'm2'">
-      <canvas ref="can2" class="can" width="350" height="200"></canvas>
+      <canvas ref="can2" class="can" width="550" height="350"></canvas>
       <p>三点画三维空间里的三角形</p>
     </div>
     <div class="wap" v-if="show === 'm3'">
-      <canvas ref="can3" class="can" width="350" height="200"></canvas>
+      <canvas ref="can3" class="can" width="550" height="350"></canvas>
       <p>使用索引画三维空间的三角形</p>
     </div>
     <div class="m4" v-if="show === 'm4'">
       <div>
         <div>
-          <canvas ref="can4" class="can" width="300" height="200"></canvas>
+          <canvas ref="can4" class="can" width="550" height="350"></canvas>
           <p>drawArrays第一个参数</p>
         </div>
         <div>
@@ -42,35 +38,35 @@
       </div>
     </div>
     <div class="wap" v-if="show === 'm5'">
-      <canvas ref="can5" class="can" width="350" height="200"></canvas>
+      <canvas ref="can5" class="can" width="550" height="350"></canvas>
       <p>使用索引画矩形</p>
     </div>
     <div class="wap" v-if="show === 'm6'">
-      <canvas ref="can6" class="can" width="350" height="200"></canvas>
+      <canvas ref="can6" class="can" width="550" height="350"></canvas>
       <p>使用索引画随机颜色的矩形</p>
     </div>
     <div class="wap" v-if="show === 'm7'">
-      <canvas ref="can7" class="can" width="350" height="200"></canvas>
+      <canvas ref="can7" class="can" width="550" height="350"></canvas>
       <p>二维移动</p>
     </div>
     <div class="wap" v-if="show === 'm8'">
-      <canvas ref="can8" class="can" width="350" height="200"></canvas>
+      <canvas ref="can8" class="can" width="550" height="350"></canvas>
       <p>二维缩放</p>
     </div>
     <div class="wap" v-if="show === 'm9'">
-      <canvas ref="can9" class="can" width="350" height="200"></canvas>
+      <canvas ref="can9" class="can" width="550" height="350"></canvas>
       <p>二维旋转</p>
     </div>
     <div class="wap" v-if="show === 'm10'">
-      <canvas ref="can10" class="can" width="350" height="200"></canvas>
+      <canvas ref="can10" class="can" width="550" height="350"></canvas>
       <p>三维旋转</p>
     </div>
     <div class="wap" v-if="show === 'm11'">
-      <canvas ref="can11" class="can" width="350" height="200"></canvas>
+      <canvas ref="can11" class="can" width="550" height="350"></canvas>
       <p>鼠标操作旋转</p>
     </div>
     <div class="wap" v-if="show === 'm12'">
-      <canvas ref="can12" class="can" width="350" height="200"></canvas>
+      <canvas ref="can12" class="can" width="550" height="350"></canvas>
       <p>纹理</p>
       <div>
         <button id="fn1">多图片重合</button>
@@ -79,17 +75,17 @@
       </div>
     </div>
     <div class="wap" v-if="show === 'm13'">
-      <canvas ref="can13" class="can" width="350" height="200"></canvas>
+      <canvas ref="can13" class="can" width="550" height="350"></canvas>
       <p>图片处理（模糊）</p>
     </div>
     <div class="wap" v-if="show === 'm14'">
-      <canvas ref="can14" class="can" width="350" height="200"></canvas>
+      <canvas ref="can14" class="can" width="550" height="350"></canvas>
       <p>随机生成</p>
     </div>
     <div class="m15" v-if="show === 'm15'">
       <div>
         <div>
-          <canvas ref="can15" class="can" width="300" height="200"></canvas>
+          <canvas ref="can15" class="can" width="550" height="350"></canvas>
           <p>二维平面变换</p>
         </div>
         <div>
@@ -158,13 +154,13 @@
       </div>
     </div>
     <div class="wap" v-if="show === 'm16'">
-      <canvas ref="can16" class="can" width="350" height="200"></canvas>
+      <canvas ref="can16" class="can" width="550" height="350"></canvas>
       <p>gl.POINTS 使用</p>
     </div>
     <div class="m17" v-if="show === 'm17'">
       <div>
         <div>
-          <canvas ref="can17" class="can" width="350" height="200"></canvas>
+          <canvas ref="can17" class="can" width="550" height="350"></canvas>
           <p>三维旋转</p>
         </div>
         <div>
@@ -300,7 +296,7 @@
     <div class="m18" v-if="show === 'm18'">
       <div>
         <div>
-          <canvas ref="can18" class="can" width="398" height="298"></canvas>
+          <canvas ref="can18" class="can" width="550" height="350"></canvas>
           <p>摄像机</p>
         </div>
         <div>
@@ -326,7 +322,7 @@
     <div class="m19" v-if="show === 'm19'">
       <div>
         <div>
-          <canvas ref="can19" class="can" width="300" height="200"></canvas>
+          <canvas ref="can19" class="can" width="550" height="350"></canvas>
           <p>平行光+雾化</p>
         </div>
         <div>
@@ -384,7 +380,7 @@
     <div class="m20" v-if="show === 'm20'">
       <div>
         <div>
-          <canvas ref="can20" class="can" width="300" height="200"></canvas>
+          <canvas ref="can20" class="can" width="550" height="350"></canvas>
           <p>点光源</p>
         </div>
         <div>
@@ -439,7 +435,7 @@
     <div class="m21" v-if="show === 'm21'">
       <div>
         <div>
-          <canvas ref="can21" class="can" width="300" height="200"></canvas>
+          <canvas ref="can21" class="can" width="550" height="350"></canvas>
           <p>聚光灯</p>
         </div>
         <div>
@@ -526,7 +522,7 @@
     <div class="m22" v-if="show === 'm22'">
       <div>
         <div>
-          <canvas ref="can22" class="can" width="300" height="200"></canvas>
+          <canvas ref="can22" class="can" width="550" height="350"></canvas>
           <p>使用浓度设置雾化</p>
         </div>
         <div>
@@ -546,17 +542,17 @@
       </div>
     </div>
     <div class="wap" v-if="show === 'm23'">
-      <canvas ref="can23" class="can" width="350" height="200"></canvas>
+      <canvas ref="can23" class="can" width="550" height="350"></canvas>
       <p>投影视图+纹理模板</p>
     </div>
     <div class="wap" v-if="show === 'm24'">
-      <canvas ref="can24" class="can" width="600" height="300"></canvas>
+      <canvas ref="can24" class="can" width="550" height="350"></canvas>
       <p>帧缓冲（framebuffer）使用</p>
     </div>
     <div class="m25" v-if="show === 'm25'">
       <div>
         <div>
-          <canvas ref="can25" class="can" width="400" height="300"></canvas>
+          <canvas ref="can25" class="can" width="550" height="350"></canvas>
           <p>贴图 + 多个program共存</p>
         </div>
       </div>
@@ -564,7 +560,7 @@
     <div class="m26" v-if="show === 'm26'">
       <div>
         <div>
-          <canvas ref="can26" class="can" width="500" height="300"></canvas>
+          <canvas ref="can26" class="can" width="550" height="350"></canvas>
           <p>投影视图+纹理模板</p>
         </div>
         <div>
@@ -596,58 +592,45 @@
       </div>
     </div>
     <div class="wap" v-if="show === 'm27'">
-      <canvas ref="can27" class="can" width="350" height="200"></canvas>
+      <canvas ref="can27" class="can" width="550" height="350"></canvas>
       <p>立方体贴图</p>
     </div>
     <div class="wap" v-if="show === 'm28'">
-      <canvas ref="can28" class="can" width="350" height="200"></canvas>
+      <canvas ref="can28" class="can" width="550" height="350"></canvas>
       <p>天空盒</p>
     </div>
     <div class="wap" v-if="show === 'm29'">
-      <canvas ref="can29" class="can" width="350" height="200"></canvas>
+      <canvas ref="can29" class="can" width="550" height="350"></canvas>
       <p>综合运用</p>
     </div>
     <div class="wap" v-if="show === 'm30'">
-      <canvas ref="can30" class="can" width="350" height="200"></canvas>
+      <canvas ref="can30" class="can" width="550" height="350"></canvas>
       <p>使用片元着色器传数据</p>
     </div>
     <div class="wap" v-if="show === 'm31'">
-      <canvas ref="can31" class="can" width="350" height="200"></canvas>
+      <canvas ref="can31" class="can" width="550" height="350"></canvas>
       <p>SCISSOR_TEST 使用</p>
     </div>
     <div class="wap" v-if="show === 'm32'">
-      <canvas ref="can32" class="can" width="350" height="200"></canvas>
+      <canvas ref="can32" class="can" width="550" height="350"></canvas>
       <p>使用图片表达文字</p>
     </div>
     <div class="wap" v-if="show === 'm33'">
-      <canvas ref="can33" class="can" width="550" height="200"></canvas>
+      <canvas ref="can33" class="can" width="550" height="350"></canvas>
       <p>双摄像机</p>
     </div>
     <div class="wap" v-if="show === 'm34'">
-      <canvas ref="can34" class="can" width="350" height="200"></canvas>
+      <canvas ref="can34" class="can" width="550" height="350"></canvas>
       <p>同时绘制多个物体的基础格式</p>
     </div>
     <div class="wap" v-if="show === 'm35'">
-      <canvas ref="can35" class="can" width="350" height="200"></canvas>
+      <canvas ref="can35" class="can" width="550" height="350"></canvas>
       <p>场景图</p>
-    </div>
-    <div class="wap" v-if="show === 'm36'">
-      <canvas ref="can36" class="can" width="350" height="200"></canvas>
-      <p>深度缓冲区的锁定与放开</p>
     </div>
   </div>
 </template>
 <script>
-import { ref, onMounted } from "vue";
-import m from "./js/m.js";
 export default {
-  setup() {
-    let can = ref("");
-    onMounted(() => {
-      m(can.value);
-    });
-    return { can };
-  },
   data() {
     return {
       show: "",
@@ -687,7 +670,6 @@ export default {
         "m33",
         "m34",
         "m35",
-        "m36",
       ],
       typeList: [
         "LINES",
@@ -710,10 +692,9 @@ export default {
       let str = tar.slice(1);
       this.show = tar;
       sessionStorage.setItem("show", tar);
-      import(`./js/${tar}.js`).then((res) => {
-        let fn = res.default,
-          target = this.$refs[`can${str}`];
-        fn(target, type ? type : this.typeList[0]);
+      import(`./js/three/${tar}.js`).then((res) => {
+        let target = this.$refs[`can${str}`];
+        res.default(target, type ? type : this.typeList[0]);
       });
     },
     showType(type) {

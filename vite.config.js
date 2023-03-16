@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import path from 'path'
 import viteCompression from 'vite-plugin-compression'  // gizp 压缩代码插件
 // Vite常用基本配置：https://www.weipxiu.com/8649.html
+import fs from 'fs';
 
 // cnpm i @babel/core @babel/preset-env @rollup/plugin-babel -D
 import babel from '@rollup/plugin-babel';

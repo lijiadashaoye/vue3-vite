@@ -4,7 +4,10 @@
     <button @click="routeChange('two')" class="navBtn">two</button>
     <button @click="routeChange('three')" class="navBtn">three</button>
     <el-button type="primary" @click="routeChange('four')">four</el-button>
+    <button @click="routeChange('five')" class="navBtn">five</button>
+    <button @click="routeChange('six')" class="navBtn">six</button>
     <Edit style="width: 1em; height: 1em; margin-right: 8px" />
+    <CirclePlus style="width: 1em; height: 1em; margin-right: 8px" />
   </div>
 
   <router-view></router-view>

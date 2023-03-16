@@ -28,6 +28,16 @@ const routes = [
         name: 'four',
         path: '/four',
         component: () => import('@/components/four.vue')
+    },
+    {
+        name: 'five',
+        path: '/five',
+        component: () => import('@/components/five.vue')
+    },
+    {
+        name: 'six',
+        path: '/six',
+        component: () => import('@/components/six.vue')
     }
 ]
 
